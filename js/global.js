@@ -1301,9 +1301,9 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- SIMPLE LOGO MARQUEE -->
 
 function initCSSMarquee() {
-  const pixelsPerSecond = 75; // Set the marquee speed (pixels per second)
+  const pixelsPerSecond = 75; // Default speed for marquees without a duration attribute
   const marquees = document.querySelectorAll('[data-css-marquee]');
-
+  
   // Duplicate each [data-css-marquee-list] element inside its container
   marquees.forEach(marquee => {
     marquee.querySelectorAll('[data-css-marquee-list]').forEach(list => {
@@ -1312,29 +1312,26 @@ function initCSSMarquee() {
     });
   });
 
-  // Toggle .is-inview instead of writing inline play-state, so hover/tap CSS still wins
+  // Create an IntersectionObserver to check if the marquee container is in view
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      entry.target.classList.toggle('is-inview', entry.isIntersecting);
+      entry.target.querySelectorAll('[data-css-marquee-list]').forEach(list => 
+        list.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused'
+      );
     });
   }, { threshold: 0 });
-
-  // Set duration per list, then observe
+  
+  // Use the duration attribute if present, otherwise calculate from width
   marquees.forEach(marquee => {
+    const customDuration = marquee.getAttribute('data-css-marquee-duration');
     marquee.querySelectorAll('[data-css-marquee-list]').forEach(list => {
-      list.style.animationDuration = (list.offsetWidth / pixelsPerSecond) + 's';
+      list.style.animationDuration = customDuration ? customDuration : (list.offsetWidth / pixelsPerSecond) + 's';
+      list.style.animationPlayState = 'paused';
     });
     observer.observe(marquee);
   });
-
-  // Tap toggle for touch (desktop uses :hover)
-  marquees.forEach(marquee => {
-    marquee.addEventListener('pointerup', (e) => {
-      if (e.pointerType === 'mouse') return;
-      marquee.classList.toggle('is-paused');
-    });
-  });
 }
+
 // Initialize CSS Marquee
 document.addEventListener('DOMContentLoaded', function() {
   initCSSMarquee();
