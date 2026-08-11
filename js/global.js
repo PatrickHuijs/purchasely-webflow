@@ -1507,7 +1507,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
 // <!-- FAQ ACCORDION -->
 	
 
-  function initAccordionCSS() {
+function initAccordionCSS() {
   document.querySelectorAll('[data-accordion-css-init]').forEach((accordion) => {
     const closeSiblings = accordion.getAttribute('data-accordion-close-siblings') === 'true';
 
