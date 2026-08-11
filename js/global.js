@@ -1,4 +1,4 @@
-<!-- NAVIGATION -->
+ // <!-- NAVIGATION -->
 
 
   function initMegaNavDirectionalHover() {
@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-<!-- DYNAMIC BACKGROUND COLOR ATTRIBUTE -->
+// <!-- DYNAMIC BACKGROUND COLOR ATTRIBUTE -->
 
   document.querySelectorAll('[data-bg-color-solid]').forEach(el => {
   el.style.background = el.getAttribute('data-bg-color-solid');
@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<!-- NAV SCROLL BACKGROUND -->
+// <!-- NAV SCROLL BACKGROUND -->
 
 gsap.registerPlugin(ScrollTrigger);
 const nav = document.querySelector(".mega-nav");
@@ -598,7 +598,7 @@ ScrollTrigger.create({
 
 
 
-<!-- BUTTON TEXT GRADIENT ON SCROLL -->
+// <!-- BUTTON TEXT GRADIENT ON SCROLL -->
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -621,7 +621,7 @@ gsap.utils.toArray('.button__text[data-text-gradient="true"]').forEach((el) => {
 
 
 
-<!-- CROSS FADE SLIDER -->
+// <!-- CROSS FADE SLIDER -->
 
 document.querySelectorAll('[data-slider="init"]').forEach(function (root) {
   var list = root.querySelector('[data-slider="list"]');
@@ -694,7 +694,7 @@ document.querySelectorAll('[data-slider="init"]').forEach(function (root) {
 
 
 
-<!-- FADE IN BLUR ELEMENT ON SCROLL -->
+// <!-- FADE IN BLUR ELEMENT ON SCROLL -->
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -729,7 +729,7 @@ document.querySelectorAll('[data-slider="init"]').forEach(function (root) {
 
 
 
-<!-- HEADING SPLIT BLUR -->
+// <!-- HEADING SPLIT BLUR -->
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -779,7 +779,7 @@ document.addEventListener("DOMContentLoaded", initWhenFontsReady);
 
 
 
-<!-- FEATURE SLIDER -->
+// <!-- FEATURE SLIDER -->
 
 gsap.registerPlugin(CustomEase, ScrollTrigger, Draggable, InertiaPlugin)
 
@@ -1122,7 +1122,7 @@ function horizontalLoop(items, config) {
 
 
 
-<!-- TOGGLE -->
+// <!-- TOGGLE -->
 
   function initToggleSwitches() {
   const cleanups = [];
@@ -1189,7 +1189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<!-- DRAGGABLE LOGO MARQUEE -->
+// <!-- DRAGGABLE LOGO MARQUEE -->
 
   gsap.registerPlugin(Observer, ScrollTrigger);
 
@@ -1298,7 +1298,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initDraggableMarquee();
 });
 
-<!-- SIMPLE LOGO MARQUEE -->
+// <!-- SIMPLE LOGO MARQUEE -->
 
 function initCSSMarquee() {
   const pixelsPerSecond = 75;
@@ -1332,7 +1332,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
 
 
 
-<!-- TEXT SPLIT -->
+// <!-- TEXT SPLIT -->
 
   gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -1394,7 +1394,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
   });
 
 
-<!-- SWIPER ACCESSIBLITY -->
+// <!-- SWIPER ACCESSIBLITY -->
 
   function fixSwiperRoles() {
     document.querySelectorAll('[role="list"].swiper-wrapper').forEach((list) => {
@@ -1411,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
 
 
 
-<!-- CARDS STAGGER ON SCROLL -->
+// <!-- CARDS STAGGER ON SCROLL -->
 
   gsap.utils.toArray('[data-scroll-stagger=wrapper]').forEach((wrapper) => {
     gsap.fromTo(
@@ -1432,7 +1432,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
   });
 
 
-<!-- FADE IN REVEAL ON SCROLL -->
+// <!-- FADE IN REVEAL ON SCROLL -->
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -1455,7 +1455,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
   });
 
 
-<!-- DIVIDER GROW REVEAL -->
+// <!-- DIVIDER GROW REVEAL -->
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -1477,7 +1477,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
   });
 
 
-<!-- PARALLAX IMAGES -->
+// <!-- PARALLAX IMAGES -->
 
   gsap.utils.toArray('[data-img-parallax="trigger"][data-animation="true"]').forEach((trigger) => {
     const target = trigger.querySelector('[data-img-parallax="target"]');
@@ -1504,7 +1504,7 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
     );
   });
 
-<!-- FAQ ACCORDION -->
+// <!-- FAQ ACCORDION -->
 	
 
   function initAccordionCSS() {
@@ -1537,7 +1537,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-<!-- LENIS SMOOTH SCROLL-->
+// <!-- LENIS SMOOTH SCROLL-->
 
   // Lenis (with GSAP ScrollTrigger)
   const lenis = new Lenis({
