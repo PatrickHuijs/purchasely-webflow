@@ -1536,7 +1536,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordionCSS();
 });
 
-/ <!-- CHART GROW REVEAL ON SCROLL -->
+// <!-- CHART GROW REVEAL ON SCROLL -->
 
   gsap.registerPlugin(ScrollTrigger);
 
