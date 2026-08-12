@@ -1394,6 +1394,46 @@ document.addEventListener('DOMContentLoaded', initCSSMarquee);
   });
 
 
+
+// <!-- GRAPH GROWTH ON ENTER -->
+
+(function () {
+  var DURATION = 900;   // ms per bar
+  var STAGGER  = 40;    // ms between bars
+  var reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function init(wrp) {
+    var bars = wrp.querySelectorAll('.graph-svg rect');
+    if (!bars.length) return;
+
+    bars.forEach(function (bar, i) {
+      // pull tx / ty out of transform="matrix(1 0 0 -1 tx ty)"
+      var n  = (bar.getAttribute('transform') || '').match(/-?[\d.]+/g) || [1, 0, 0, -1, 0, 0];
+      var at = 'translate(' + n[4] + 'px,' + n[5] + 'px) scaleY(';
+
+      bar._to = at + '-1)';
+      bar.style.transform = at + (reduce ? -1 : 0) + ')';
+      bar.style.setProperty('--dur', DURATION + 'ms');
+      bar.style.setProperty('--delay', (i * STAGGER) + 'ms');
+    });
+
+    wrp.classList.add('is-ready');
+    if (reduce) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        bars.forEach(function (bar) { bar.style.transform = bar._to; });
+        io.unobserve(entry.target); // play once, no reverse on scroll up
+      });
+    }, { threshold: 0.2 });
+
+    io.observe(wrp);
+  }
+
+  document.querySelectorAll('.graph_graph-wrp').forEach(init);
+})();
+
 // <!-- SWIPER ACCESSIBLITY -->
 
   function fixSwiperRoles() {
