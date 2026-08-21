@@ -598,6 +598,34 @@ ScrollTrigger.create({
 
 
 
+// <!-- NEW NAV -->
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var navbar = document.querySelector('.navbar');
+  if (!navbar) return;
+
+  var THRESHOLD = 50;
+  var ticking = false;
+
+  function update() {
+    navbar.classList.toggle('is-scrolled', window.scrollY > THRESHOLD);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+
+  update();
+});
+
+	
+
+
 // <!-- BUTTON TEXT GRADIENT ON SCROLL -->
 
 gsap.registerPlugin(ScrollTrigger);
