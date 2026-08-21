@@ -602,54 +602,65 @@ ScrollTrigger.create({
 
 
 
+(function () {
+  function initNav() {
+    try {
+      var navbar = document.querySelector('.navbar');
+      var navComponent = document.querySelector('.nav_component');
+      if (!navbar) return;
 
+      var THRESHOLD = 50;
+      var ATTR = 'data-wf--nav--variant';
+      var VARIANT_CLASS = 'w-variant-60e6535e-fa98-f488-883d-dfb6393bd1d2';
+      var ticking = false;
 
-document.addEventListener('DOMContentLoaded', function () {
-  var navbar = document.querySelector('.navbar');
-  var navComponent = document.querySelector('.nav_component');
-  if (!navbar) return;
+      var hadInverted = navComponent && navComponent.getAttribute(ATTR) === 'inverted';
+      var variantEls = Array.prototype.slice.call(
+        document.querySelectorAll('.nav_component .' + VARIANT_CLASS)
+      );
 
-  var THRESHOLD = 50;
-  var ATTR = 'data-wf--nav--variant';
-  var VARIANT_CLASS = 'w-variant-60e6535e-fa98-f488-883d-dfb6393bd1d2';
-  var ticking = false;
+      function update() {
+        try {
+          var scrolled = window.scrollY > THRESHOLD;
+          navbar.classList.toggle('is-scrolled', scrolled);
+          if (navComponent) navComponent.classList.toggle('is-scrolled', scrolled);
 
-  // Remember page-load state
-  var hadInverted = navComponent && navComponent.getAttribute(ATTR) === 'inverted';
-  var variantEls = Array.prototype.slice.call(
-    document.querySelectorAll('.nav_component .' + VARIANT_CLASS)
-  );
+          if (hadInverted) {
+            if (scrolled) {
+              navComponent.removeAttribute(ATTR);
+            } else {
+              navComponent.setAttribute(ATTR, 'inverted');
+            }
+          }
 
-  function update() {
-    var scrolled = window.scrollY > THRESHOLD;
-    navbar.classList.toggle('is-scrolled', scrolled);
-    if (navComponent) navComponent.classList.toggle('is-scrolled', scrolled);
-
-    if (hadInverted) {
-      if (scrolled) {
-        navComponent.removeAttribute(ATTR);
-      } else {
-        navComponent.setAttribute(ATTR, 'inverted');
+          variantEls.forEach(function (el) {
+            el.classList.toggle(VARIANT_CLASS, !scrolled);
+          });
+        } catch (err) {
+          console.error('Nav update error:', err);
+        }
+        ticking = false;
       }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }, { passive: true });
+
+      update();
+    } catch (err) {
+      console.error('Nav init error:', err);
     }
-
-    variantEls.forEach(function (el) {
-      el.classList.toggle(VARIANT_CLASS, !scrolled);
-    });
-
-    ticking = false;
   }
 
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-  }, { passive: true });
-
-  update();
-});
-
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNav);
+  } else {
+    initNav();
+  }
+})();
 
 	
 
