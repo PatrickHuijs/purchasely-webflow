@@ -602,6 +602,7 @@ ScrollTrigger.create({
 
 
 
+
 document.addEventListener('DOMContentLoaded', function () {
   var navbar = document.querySelector('.navbar');
   var navComponent = document.querySelector('.nav_component');
@@ -609,10 +610,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var THRESHOLD = 50;
   var ATTR = 'data-wf--nav--variant';
+  var VARIANT_CLASS = 'w-variant-60e6535e-fa98-f488-883d-dfb6393bd1d2';
   var ticking = false;
 
   // Remember page-load state
   var hadInverted = navComponent && navComponent.getAttribute(ATTR) === 'inverted';
+  var variantEls = Array.prototype.slice.call(
+    document.querySelectorAll('.nav_component .' + VARIANT_CLASS)
+  );
 
   function update() {
     var scrolled = window.scrollY > THRESHOLD;
@@ -626,6 +631,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    variantEls.forEach(function (el) {
+      el.classList.toggle(VARIANT_CLASS, !scrolled);
+    });
+
     ticking = false;
   }
 
@@ -638,6 +647,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   update();
 });
+
 
 
 	
