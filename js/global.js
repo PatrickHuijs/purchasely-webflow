@@ -603,6 +603,7 @@ ScrollTrigger.create({
 
 
 
+
 document.addEventListener('DOMContentLoaded', function () {
   var navbar = document.querySelector('.navbar');
   var navComponent = document.querySelector('.nav_component');
@@ -622,6 +623,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function update() {
     var scrolled = window.scrollY > THRESHOLD;
     navbar.classList.toggle('is-scrolled', scrolled);
+    if (navComponent) navComponent.classList.toggle('is-scrolled', scrolled);
 
     if (hadInverted) {
       if (scrolled) {
@@ -647,7 +649,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   update();
 });
-
 
 
 	
