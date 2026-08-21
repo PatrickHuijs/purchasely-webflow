@@ -601,15 +601,31 @@ ScrollTrigger.create({
 // <!-- NEW NAV -->
 
 
+
 document.addEventListener('DOMContentLoaded', function () {
   var navbar = document.querySelector('.navbar');
+  var navComponent = document.querySelector('.nav_component');
   if (!navbar) return;
 
   var THRESHOLD = 50;
+  var ATTR = 'data-wf--nav--variant';
   var ticking = false;
 
+  // Remember page-load state
+  var hadInverted = navComponent && navComponent.getAttribute(ATTR) === 'inverted';
+
   function update() {
-    navbar.classList.toggle('is-scrolled', window.scrollY > THRESHOLD);
+    var scrolled = window.scrollY > THRESHOLD;
+    navbar.classList.toggle('is-scrolled', scrolled);
+
+    if (hadInverted) {
+      if (scrolled) {
+        navComponent.removeAttribute(ATTR);
+      } else {
+        navComponent.setAttribute(ATTR, 'inverted');
+      }
+    }
+
     ticking = false;
   }
 
@@ -622,6 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   update();
 });
+
 
 	
 
