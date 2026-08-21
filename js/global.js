@@ -586,16 +586,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // <!-- NAV SCROLL BACKGROUND -->
 
 gsap.registerPlugin(ScrollTrigger);
-const nav = document.querySelector(".mega-nav");
-ScrollTrigger.create({
-  start: "top top-=1",
-  end: "max",
-  onUpdate: (self) => {
-    nav.classList.toggle("is--scrolled", self.scroll() > 0);
-  }
-});
-
-
+(function () {
+  var nav = document.querySelector(".mega-nav");
+  if (!nav) return;
+  ScrollTrigger.create({
+    start: "top top-=1",
+    end: "max",
+    onUpdate: function (self) {
+      nav.classList.toggle("is--scrolled", self.scroll() > 0);
+    }
+  });
+})();
 
 
 // <!-- NEW NAV -->
